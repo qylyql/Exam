@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey_f3f3f3">
 
-    <RelativeLayout
+    <RelativeLayoutcmd
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -80,7 +80,7 @@
             android:text="@string/see_excel"
             android:textColor="@color/green_006400"
             android:drawablePadding="10dp"/>
-    </RelativeLayout>
+    </RelativeLayoutcmd>
 
     <TextView
         android:id="@+id/item_mainlv_top_tv_day"
