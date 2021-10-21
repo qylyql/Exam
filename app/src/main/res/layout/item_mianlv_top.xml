@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey_f3f3f3">
 
-    <RelativeLayoutcmd
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:src="@mipmap/ih_show"
             android:layout_alignTop="@id/item_mainlv_top_tv_out"/>
 
         <TextView
@@ -74,13 +75,14 @@
             android:id="@+id/item_mainlv_top_tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ih_biaoge"
             android:layout_below="@id/item_mainlv_top_tv2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/see_excel"
             android:textColor="@color/green_006400"
             android:drawablePadding="10dp"/>
-    </RelativeLayoutcmd>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/item_mainlv_top_tv_day"
@@ -92,3 +94,10 @@
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>
+
+
+
+
+
+
+

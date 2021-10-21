@@ -16,7 +16,7 @@
             android:id="@+id/frag_record_iv"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            />
+            android:src="@mipmap/ic_qita_fs"/>
 
         <TextView
             android:id="@+id/frag_record_tv_type"
@@ -96,3 +96,21 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

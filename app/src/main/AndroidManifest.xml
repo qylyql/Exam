@@ -3,15 +3,14 @@
     package="com.swufestu.examtally">
 
     <application
+        android:name=".UniteApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Examtally">
-        <activity
-            android:name=".RecordActivity"
-            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RecordActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
