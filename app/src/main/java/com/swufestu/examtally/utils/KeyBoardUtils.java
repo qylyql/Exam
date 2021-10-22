@@ -10,13 +10,12 @@ import android.widget.EditText;
 import com.swufestu.examtally.R;
 
 public class KeyBoardUtils {
-
     private final Keyboard k1;    //自定义键盘
     private KeyboardView keyboardView;
     private EditText editText;
 
     public interface OnEnsureListener{
-        public void onEnsure();  //点击完成，接口回调
+        public void onEnsure();
     }
     OnEnsureListener onEnsureListener;
 
@@ -58,7 +57,7 @@ public class KeyBoardUtils {
                 case Keyboard.KEYCODE_CANCEL:   //点击了清零
                     editable.clear();
                     break;
-                case Keyboard.KEYCODE_DONE:    //点击了确定
+                case Keyboard.KEYCODE_DONE:    //点击了完成
                     onEnsureListener.onEnsure();   //通过接口回调的方法，当点击确定时，可以调用这个方法
                     break;
                 default:  //其他数字直接插入

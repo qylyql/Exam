@@ -1,5 +1,6 @@
 package com.swufestu.examtally.db;
 
+
 /** 描述记录一条数据的相关内容类*/
 public class AccountBean {
     int id;
@@ -109,3 +110,4 @@ public class AccountBean {
         this.kind = kind;
     }
 }
+

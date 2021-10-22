@@ -14,8 +14,8 @@ import com.swufestu.examtally.db.AccountBean;
 import java.util.Calendar;
 import java.util.List;
 
-public class AccountAdapter extends BaseAdapter {
 
+public class AccountAdapter extends BaseAdapter {
     Context context;
     List<AccountBean>mDatas;
     LayoutInflater inflater;
@@ -55,7 +55,6 @@ public class AccountAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-
         AccountBean bean = mDatas.get(position);
         holder.typeIv.setImageResource(bean.getsImageId());
         holder.typeTv.setText(bean.getTypename());

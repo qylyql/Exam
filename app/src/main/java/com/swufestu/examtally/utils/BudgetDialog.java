@@ -22,11 +22,9 @@ import androidx.annotation.NonNull;
 import com.swufestu.examtally.R;
 
 public class BudgetDialog extends Dialog implements View.OnClickListener {
-
     ImageView cancelIv;
     Button ensureBtn;
     EditText moneyEt;
-
     public  interface OnEnsureListener{
         public void onEnsure(float money);
     }
@@ -44,11 +42,9 @@ public class BudgetDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_budget);
-
         cancelIv = findViewById(R.id.dialog_budget_iv_error);
         ensureBtn = findViewById(R.id.dialog_budget_btn_ensure);
         moneyEt = findViewById(R.id.dialog_budget_et);
-
         cancelIv.setOnClickListener(this);
         ensureBtn.setOnClickListener(this);
     }
@@ -56,27 +52,21 @@ public class BudgetDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.dialog_budget_iv_error:
                 cancel();  //取消对话框
                 break;
-
             case R.id.dialog_budget_btn_ensure:
                 //获取输入数据数值
                 String data = moneyEt.getText().toString();
-
                 if (TextUtils.isEmpty(data)) {
-                    Toast.makeText(getContext(),"输入数据为空!!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"输入数据不能为空！",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 float money = Float.parseFloat(data);
-
                 if (money<=0) {
-                    Toast.makeText(getContext(),"预算金额应该大于0",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"预算金额必须大于0",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 if (onEnsureListener!=null) {
                     onEnsureListener.onEnsure(money);
                 }

@@ -13,6 +13,7 @@ public class UniteApp extends Application {
 
         // 初始化数据库
         DBManager.initDB(getApplicationContext());
+
     }
 }
 

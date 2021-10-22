@@ -49,7 +49,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         super.onCreate(savedInstanceState);
         accountBean = new AccountBean();   //创建对象
         accountBean.setTypename("其他");
-        //accountBean.setsImageId(R.mipmap.ic_qita_fs);
+        accountBean.setsImageId(R.mipmap.ic_qita_fs);
     }
 
     @Override
@@ -129,13 +129,10 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
                     getActivity().finish();
                     return;
                 }
-
                 float money = Float.parseFloat(moneyStr);
                 accountBean.setMoney(money);
-
                 //获取记录的信息，保存在数据库当中
                 saveAccountToDB();
-
                 // 返回上一级页面
                 getActivity().finish();
             }
@@ -148,20 +145,18 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.frag_record_tv_time:
-                showTimeDialog();
+                //showTimeDialog();
                 break;
             case R.id.frag_record_tv_beizhu:
                 showBZDialog();
                 break;
         }
     }
-
-   /*  弹出显示时间的对话框*/
+    /* 弹出显示时间的对话框*/
+    /*
     private void showTimeDialog() {
-
         SelectTimeDialog dialog = new SelectTimeDialog(getContext());
         dialog.show();
-
         //设定确定按钮被点击了的监听器
         dialog.setOnEnsureListener(new SelectTimeDialog.OnEnsureListener() {
             @Override
@@ -174,6 +169,8 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
             }
         });
     }
+
+     */
 
     /* 弹出备注对话框*/
     public  void showBZDialog(){

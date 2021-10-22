@@ -1,7 +1,5 @@
 package com.swufestu.examtally.adapter;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,10 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.List;
 
 public class RecordPagerAdapter extends FragmentPagerAdapter {
-
     List<Fragment>fragmentList;
     String[]titles = {"支出","收入"};
-
     public RecordPagerAdapter(@NonNull FragmentManager fm,List<Fragment>fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;

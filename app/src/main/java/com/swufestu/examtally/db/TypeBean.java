@@ -1,6 +1,5 @@
 package com.swufestu.examtally.db;
 
-
 /*
  * 表示收入或者支出具体类型的类
  * */
@@ -9,7 +8,7 @@ public class TypeBean {
     String typename;   //类型名称
     int imageId;    //未被选中图片id
     int simageId;    //被选中图片id
-    int kind;     //收入-1  支出-0
+    int kind;     //收入--1  支出--0
 
     public int getId() {
         return id;

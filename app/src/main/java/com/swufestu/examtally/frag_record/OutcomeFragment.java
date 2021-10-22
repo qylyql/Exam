@@ -15,7 +15,6 @@ public class OutcomeFragment extends BaseRecordFragment {
     @Override
     public void loadDataToGV() {
         super.loadDataToGV();
-
         //获取数据库当中的数据源
         List<TypeBean> outlist = DBManager.getTypeList(0);
         typeList.addAll(outlist);

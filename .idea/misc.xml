@@ -8,11 +8,12 @@
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2328125" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/drawable/main_morebtn_bg.xml" value="0.14270833333333333" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/drawable/main_recordbtn_bg.xml" value="0.1361111111111111" />
-        <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/activity_record.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/dialog_beizhu.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/dialog_budget.xml" value="0.16" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/dialog_calendar.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/dialog_time.xml" value="0.18697916666666667" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/fragment_outcome.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/item_mainlv.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/examtally/app/src/main/res/layout/item_mainlv_top.xml" value="0.264" />

@@ -47,9 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_budget_tv2"
         android:layout_marginTop="20dp"
+        android:background="@drawable/main_morebtn_bg"
         android:text="@string/ensure"
-        android:textStyle="bold"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:background="@drawable/main_recordbtn_bg"
-        android:textColor="@color/white"/>
+        android:textStyle="bold" />
 </RelativeLayout>

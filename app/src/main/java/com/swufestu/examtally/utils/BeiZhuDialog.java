@@ -19,11 +19,9 @@ import androidx.annotation.NonNull;
 import com.swufestu.examtally.R;
 
 public class BeiZhuDialog extends Dialog implements View.OnClickListener {
-
     EditText et;
     Button cancelBtn,ensureBtn;
     OnEnsureListener onEnsureListener;
-
     // 设定回调接口的方法
     public void setOnEnsureListener(OnEnsureListener onEnsureListener) {
         this.onEnsureListener = onEnsureListener;
@@ -36,7 +34,6 @@ public class BeiZhuDialog extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.dialog_beizhu);//设置对话框显示布局
         et = findViewById(R.id.dialog_beizhu_et);
         cancelBtn = findViewById(R.id.dialog_beizhu_btn_cancel);
@@ -66,7 +63,6 @@ public class BeiZhuDialog extends Dialog implements View.OnClickListener {
     public String getEditText(){
         return et.getText().toString().trim();
     }
-
     /* 设置Dialog的尺寸和屏幕尺寸一致*/
     public void setDialogSize(){
 //        获取当前窗口对象
