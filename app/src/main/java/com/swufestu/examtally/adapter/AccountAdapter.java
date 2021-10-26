@@ -78,7 +78,6 @@ public class AccountAdapter extends BaseAdapter {
             timeTv = view.findViewById(R.id.item_mainlv_tv_time);
             beizhuTv = view.findViewById(R.id.item_mainlv_tv_beizhu);
             moneyTv = view.findViewById(R.id.item_mainlv_tv_money);
-
         }
     }
 }

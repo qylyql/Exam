@@ -19,15 +19,14 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
-        <!--
-                <ImageView
-                    android:id="@+id/main_iv_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:padding="10dp"
-                    android:src="@mipmap/search" />
-        -->
+
+        <ImageView
+            android:id="@+id/main_iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@mipmap/search" />
 
     </RelativeLayout>
 
@@ -55,6 +54,7 @@
         android:text="@string/editone"
         android:textColor="@color/black"
         android:textStyle="bold" />
+
     <Button
         android:id="@+id/main_btn_more"
         android:layout_width="100dp"
@@ -70,42 +70,6 @@
         android:text="@string/exit"
         android:background="@drawable/main_recordbtn_bg"
         android:textColor="@color/black"
-
         />
-
-<!--
-
-    <ImageView
-        android:id="@+id/main_btn_edit"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@id/main_btn_more"
-        android:layout_toLeftOf="@id/main_btn_more"
-        android:background="@drawable/main_recordbtn_bg"
-        android:gravity="center_vertical"
-        android:src="@mipmap/edit"
-        android:text="@string/editone"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/main_btn_more"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100sp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/exit"
-        android:src="@mipmap/more"
-        android:background="@drawable/main_recordbtn_bg"
-        android:textColor="@color/white"
-
-        />
-   !-->
-
-
 
 </RelativeLayout>

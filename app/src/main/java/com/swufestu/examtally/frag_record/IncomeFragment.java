@@ -1,16 +1,12 @@
 package com.swufestu.examtally.frag_record;
 
-
 import com.swufestu.examtally.R;
 import com.swufestu.examtally.db.DBManager;
 import com.swufestu.examtally.db.TypeBean;
 import java.util.List;
-/**
- * 收入记录页面
- */
+
+//收入记录页面
 public class IncomeFragment extends BaseRecordFragment {
-
-
     @Override
     public void loadDataToGV() {
         super.loadDataToGV();

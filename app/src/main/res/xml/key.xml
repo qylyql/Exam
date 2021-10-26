@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--keyHeight 每一个按键的高度   keyWidth:每一个按键宽度25% -->
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyHeight="50dp"
     android:keyWidth="25%p"

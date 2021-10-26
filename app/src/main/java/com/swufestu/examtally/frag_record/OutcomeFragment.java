@@ -1,17 +1,11 @@
 package com.swufestu.examtally.frag_record;
 
-import androidx.fragment.app.Fragment;
 import com.swufestu.examtally.R;
 import com.swufestu.examtally.db.DBManager;
 import com.swufestu.examtally.db.TypeBean;
 import java.util.List;
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class OutcomeFragment extends BaseRecordFragment {
-
-
-    // 重写
     @Override
     public void loadDataToGV() {
         super.loadDataToGV();

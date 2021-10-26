@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Examtally">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
@@ -23,6 +23,11 @@
         <activity
             android:name=".RecordActivity"
             android:exported="true" />
+        <activity
+            android:name=".ExitActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true" />
     </application>
-
 </manifest>

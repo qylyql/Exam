@@ -1,14 +1,11 @@
 package com.swufestu.examtally.db;
 
-/*
- * 表示收入或者支出具体类型的类
- * */
 public class TypeBean {
     int id;
-    String typename;   //类型名称
-    int imageId;    //未被选中图片id
-    int simageId;    //被选中图片id
-    int kind;     //收入--1  支出--0
+    String typename;
+    int imageId;
+    int simageId;
+    int kind;
 
     public int getId() {
         return id;
@@ -48,9 +45,6 @@ public class TypeBean {
 
     public void setKind(int kind) {
         this.kind = kind;
-    }
-
-    public TypeBean() {
     }
 
     public TypeBean(int id, String typename, int imageId, int simageId, int kind) {
