@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-//对数据库中的内容进行加入、删除、修改、查询等操作
+//对数据库中的内容进行基本操作
 public class DBManager {
     private static SQLiteDatabase db;
     //初始化数据库对象
@@ -44,58 +44,33 @@ public class DBManager {
         values.put("sImageId", bean.getsImageId());
         values.put("beizhu", bean.getBeizhu());
         values.put("money", bean.getMoney());
-        values.put("time", bean.getTime());
-        values.put("year", bean.getYear());
-        values.put("month", bean.getMonth());
-        values.put("day", bean.getDay());
         values.put("kind", bean.getKind());
         db.insert("accounttb", null, values);
     }
 
     //获取记账表当中某一天的所有支出或者收入情况
-    public static List<AccountBean> getAccountListOneDayFromAccounttb(int year, int month, int day) {
+    public static List<AccountBean> getAccountListOneDayFromAccounttb() {
         List<AccountBean> list = new ArrayList<>();
-        String sql = "select * from accounttb where year=? and month=? and day=? order by id desc";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", day + ""});
+        String sql = "select * from accounttb ";
+        Cursor cursor = db.rawQuery(sql,new String[]{});
         while (cursor.moveToNext()) {
             @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
             @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
             @SuppressLint("Range") String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
-            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
             @SuppressLint("Range") int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
             @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("money"));
-            AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
-            list.add(accountBean);
-        }
-        return list;
-    }
-
-    //获取记账表当中某一月的所有支出或者收入情况
-    public static List<AccountBean> getAccountListOneMonthFromAccounttb(int year, int month) {
-        List<AccountBean> list = new ArrayList<>();
-        String sql = "select * from accounttb where year=? and month=? order by id desc";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + ""});
-        while (cursor.moveToNext()) {
-            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
-            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
-            @SuppressLint("Range") String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
-            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
-            @SuppressLint("Range") int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
-            @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
-            @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("money"));
-            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
-            AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
+            AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, kind);
             list.add(accountBean);
         }
         return list;
     }
 
     //获取某一天的支出或者收入的总金额
-    public static float getSumMoneyOneDay(int year, int month, int day, int kind) {
+    public static float getSumMoneyOneDay(int kind) {
         float total = 0.0f;
-        String sql = "select sum(money) from accounttb where year=? and month=? and day=? and kind=?";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", day + "", kind + ""});
+        String sql = "select sum(money) from accounttb where kind=?";
+        Cursor cursor = db.rawQuery(sql, new String[]{kind + ""});
         // 遍历
         if (cursor.moveToFirst()) {
             @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("sum(money)"));
@@ -103,31 +78,6 @@ public class DBManager {
         }
         return total;
     }
-
-    //获取某一月的支出或者收入的总金额
-    public static float getSumMoneyOneMonth(int year, int month, int kind) {
-        float total = 0.0f;
-        String sql = "select sum(money) from accounttb where year=? and month=? and kind=?";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", kind + ""});
-        if (cursor.moveToFirst()) {
-            @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("sum(money)"));
-            total = money;
-        }
-        return total;
-    }
-
-    //统计某月份支出或者收入情况有多少条
-    public static int getCountItemOneMonth(int year, int month, int kind) {
-        int total = 0;
-        String sql = "select count(money) from accounttb where year=? and month=? and kind=?";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", kind + ""});
-        if (cursor.moveToFirst()) {
-            @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex("count(" +"money)"));
-            total = count;
-        }
-        return total;
-    }
-
     //根据传入的id，删除accounttb表当中的一条数据
     public static int deleteItemFromAccounttbById(int id) {
         int i = db.delete("accounttb", "id=?", new String[]{id + ""});
@@ -143,38 +93,15 @@ public class DBManager {
             @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
             @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
             @SuppressLint("Range") String bz = cursor.getString(cursor.getColumnIndex("beizhu"));
-            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
             @SuppressLint("Range") int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
             @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("money"));
-            @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex("year"));
-            @SuppressLint("Range") int month = cursor.getInt(cursor.getColumnIndex("month"));
-            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
-            AccountBean accountBean = new AccountBean(id, typename, sImageId, bz, money, time, year, month, day, kind);
+            AccountBean accountBean = new AccountBean(id, typename, sImageId, bz, money, kind);
             list.add(accountBean);
         }
         return list;
     }
 
-    //删除accounttb表格当中的所有数据
-    public static void deleteAllAccount() {
-        String sql = "delete from accounttb";
-        db.execSQL(sql);
-    }
-
-    /**
-     * 获取这个月当中某一天收入支出最大的金额，金额是多少
-     */
-
-    public static float getMaxMoneyOneDayInMonth(int year, int month, int kind) {
-        String sql = "select sum(money) from accounttb where year=? and month=? and kind=? group by day order by sum(money) desc";
-        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", kind + ""});
-        if (cursor.moveToFirst()) {
-            @SuppressLint("Range") float money = cursor.getFloat(cursor.getColumnIndex("sum(money)"));
-            return money;
-        }
-        return 0;
-    }
 }
 
 

@@ -81,7 +81,6 @@
             android:id="@+id/frag_record_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2022年10月20日 23:23"
             android:layout_alignParentRight="true"
             android:padding="10dp"/>
 

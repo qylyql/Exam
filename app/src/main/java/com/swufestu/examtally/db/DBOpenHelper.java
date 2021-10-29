@@ -22,8 +22,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         insertType(db);
         //创建记账表
         sql = "create table accounttb(id integer primary key autoincrement,typename varchar(10)," +
-                "sImageId integer,beizhu varchar(80),money float," +
-                "time varchar(60),year integer,month integer,day integer,kind integer)";
+                "sImageId integer,beizhu varchar(80),money float," + "kind integer)";
         db.execSQL(sql);
     }
 

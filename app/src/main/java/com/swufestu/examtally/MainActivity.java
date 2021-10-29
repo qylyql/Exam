@@ -8,8 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,10 +18,8 @@ import android.widget.TextView;
 import com.swufestu.examtally.adapter.AccountAdapter;
 import com.swufestu.examtally.db.AccountBean;
 import com.swufestu.examtally.db.DBManager;
-import com.swufestu.examtally.utils.BudgetDialog;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,14 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int year,month,day;
     //头布局相关控件
     View headerView;
-    TextView topOutTv,topInTv,topbudgetTv,topConTv;
-    ImageView topShowIv;
+    TextView topConTv;
     SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initTime();
         initView();
         preferences = getSharedPreferences("budget", Context.MODE_PRIVATE);
         //添加ListView的头布局
@@ -110,22 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         headerView = getLayoutInflater().inflate(R.layout.item_mainlv_top, null);
         todayLv.addHeaderView(headerView);
         //查找头布局可用控件
-        topOutTv = headerView.findViewById(R.id.item_mainlv_top_tv_out);
-        topInTv = headerView.findViewById(R.id.item_mainlv_top_tv_in);
-        topbudgetTv = headerView.findViewById(R.id.item_mainlv_top_tv_budget);
         topConTv = headerView.findViewById(R.id.item_mainlv_top_tv_day);
-        topShowIv = headerView.findViewById(R.id.item_mainlv_top_iv_hide);
-        topbudgetTv.setOnClickListener(this);
         headerView.setOnClickListener(this);
-        topShowIv.setOnClickListener(this);
-    }
-
-    //获取今日的具体时间
-    private void initTime() {
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        day = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     // 当activity获取焦点时，会调用的方法
@@ -139,29 +119,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //设置头布局当中文本内容的显示
     private void setTopTvShow() {
         //获取今日支出和收入总金额，显示在view当中
-        float incomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 1);
-        float outcomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 0);
+        float incomeOneDay = DBManager.getSumMoneyOneDay(1);
+        float outcomeOneDay = DBManager.getSumMoneyOneDay(0);
         String infoOneDay = "今日支出 ￥"+outcomeOneDay+"  收入 ￥"+incomeOneDay;
         topConTv.setText(infoOneDay);
-        //获取本月收入和支出总金额
-        float incomeOneMonth = DBManager.getSumMoneyOneMonth(year, month, 1);
-        float outcomeOneMonth = DBManager.getSumMoneyOneMonth(year, month, 0);
-        topInTv.setText("￥"+incomeOneMonth);
-        topOutTv.setText("￥"+outcomeOneMonth);
-
-        //设置显示运算剩余
-        float bmoney = preferences.getFloat("bmoney", 0);//预算
-        if (bmoney == 0) {
-            topbudgetTv.setText("￥ 0");
-        }else{
-            float syMoney = bmoney-outcomeOneMonth;
-            topbudgetTv.setText("￥"+syMoney);
-        }
     }
 
     // 加载数据库数据
     private void loadDBData() {
-        List<AccountBean> list = DBManager.getAccountListOneDayFromAccounttb(year, month, day);
+        List<AccountBean> list = DBManager.getAccountListOneDayFromAccounttb();
         mDatas.clear();
         mDatas.addAll(list);
         adapter.notifyDataSetChanged();
@@ -183,13 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent it2 = new Intent(this, ExitActivity.class);
                 startActivity(it2);
                 break;
-            case R.id.item_mainlv_top_tv_budget:
-                showBudgetDialog();
-                break;
-            case R.id.item_mainlv_top_iv_hide:
-                // 切换TextView明文和密文
-                toggleShow();
-                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
@@ -197,49 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == headerView) {
             //头布局被点击了
             Intent intent = new Intent();
-            //intent.setClass(this, MonthChartActivity.class);
             startActivity(intent);
-        }
-    }
-
-    //显示运算设置对话框
-    private void showBudgetDialog() {
-        BudgetDialog dialog = new BudgetDialog(this);
-        dialog.show();
-        dialog.setDialogSize();
-        dialog.setOnEnsureListener(new BudgetDialog.OnEnsureListener() {
-            @Override
-            public void onEnsure(float money) {
-                //将预算金额写入到共享参数当中，进行存储
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putFloat("bmoney",money);
-                editor.commit();
-                //计算剩余金额
-                float outcomeOneMonth = DBManager.getSumMoneyOneMonth(year, month, 0);
-                float syMoney = money-outcomeOneMonth;//预算剩余 = 预算-支出
-                topbudgetTv.setText("￥"+syMoney);
-            }
-        });
-    }
-
-    boolean isShow = true;
-
-    //点击头布局眼睛时，如果原来是明文，就加密，如果是密文，就显示出来
-    private void toggleShow() {
-        if (isShow) {   //加密
-            PasswordTransformationMethod passwordMethod = PasswordTransformationMethod.getInstance();
-            topInTv.setTransformationMethod(passwordMethod);
-            topOutTv.setTransformationMethod(passwordMethod);
-            topbudgetTv.setTransformationMethod(passwordMethod);
-            topShowIv.setImageResource(R.mipmap.ih_hide);
-            isShow = false;
-        }else{  //解密
-            HideReturnsTransformationMethod hideMethod = HideReturnsTransformationMethod.getInstance();
-            topInTv.setTransformationMethod(hideMethod);
-            topOutTv.setTransformationMethod(hideMethod);
-            topbudgetTv.setTransformationMethod(hideMethod);
-            topShowIv.setImageResource(R.mipmap.ih_show);
-            isShow = true;
         }
     }
 }

@@ -48,11 +48,10 @@
         android:layout_alignBottom="@id/main_btn_more"
         android:layout_toLeftOf="@id/main_btn_more"
         android:background="@drawable/main_recordbtn_bg"
-        android:drawableLeft="@mipmap/edit"
         android:gravity="center"
-        android:textSize="16dp"
         android:text="@string/editone"
         android:textColor="@color/black"
+        android:textSize="16dp"
         android:textStyle="bold" />
 
     <Button

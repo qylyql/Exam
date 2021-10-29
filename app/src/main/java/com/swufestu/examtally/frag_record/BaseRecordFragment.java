@@ -21,12 +21,8 @@ import com.swufestu.examtally.db.AccountBean;
 import com.swufestu.examtally.db.TypeBean;
 import com.swufestu.examtally.utils.BeiZhuDialog;
 import com.swufestu.examtally.utils.KeyBoardUtils;
-import com.swufestu.examtally.utils.SelectTimeDialog;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 //记录页面当中的支出模块
@@ -35,7 +31,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     KeyboardView keyboardView;
     EditText moneyEt;
     ImageView typeIv;
-    TextView typeTv,beizhuTv,timeTv;
+    TextView typeTv,beizhuTv;
     GridView typeGv;
     List<TypeBean>typeList;
     TypeBaseAdapter adapter;
@@ -53,29 +49,11 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_outcome, container, false);
         initView(view);
-        setInitTime();
         //给GridView填充数据的方法
         loadDataToGV();
         setGVListener(); //设置GridView每一项的点击事件
         return view;
     }
-
-    //获取当前时间，显示在timeTv上
-    private void setInitTime() {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-        String time = sdf.format(date);
-        timeTv.setText(time);
-        accountBean.setTime(time);
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        accountBean.setYear(year);
-        accountBean.setMonth(month);
-        accountBean.setDay(day);
-    }
-
     //设置GridView每一项的点击事件
     private void setGVListener() {
         typeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,9 +86,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         typeGv = view.findViewById(R.id.frag_record_gv);
         typeTv = view.findViewById(R.id.frag_record_tv_type);
         beizhuTv = view.findViewById(R.id.frag_record_tv_beizhu);
-        timeTv = view.findViewById(R.id.frag_record_tv_time);
         beizhuTv.setOnClickListener(this);
-        timeTv.setOnClickListener(this);
         //让自定义软键盘显示出来
         KeyBoardUtils boardUtils = new KeyBoardUtils(keyboardView, moneyEt);
         boardUtils.showKeyboard();
@@ -139,29 +115,10 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.frag_record_tv_time:
-                showTimeDialog();
-                break;
             case R.id.frag_record_tv_beizhu:
                 showBZDialog();
                 break;
         }
-    }
-
-    //弹出显示时间的对话框
-    private void showTimeDialog() {
-        SelectTimeDialog dialog = new SelectTimeDialog(getContext());
-        dialog.show();
-        dialog.setOnEnsureListener(new SelectTimeDialog.OnEnsureListener() {
-            @Override
-            public void onEnsure(String time, int year, int month, int day) {
-                timeTv.setText(time);
-                accountBean.setTime(time);
-                accountBean.setYear(year);
-                accountBean.setMonth(month);
-                accountBean.setDay(day);
-            }
-        });
     }
 
     //弹出备注对话框

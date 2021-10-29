@@ -89,12 +89,4 @@ public class KeyBoardUtils {
             keyboardView.setVisibility(View.VISIBLE);
         }
     }
-
-    //    隐藏键盘
-    public void hideKeyboard(){
-        int visibility = keyboardView.getVisibility();
-        if (visibility== View.VISIBLE||visibility==View.INVISIBLE) {
-            keyboardView.setVisibility(View.GONE);
-        }
-    }
 }
